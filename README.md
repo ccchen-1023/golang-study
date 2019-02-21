@@ -1,4 +1,4 @@
-golang
+golang-study
 ===
 
 Learn Material

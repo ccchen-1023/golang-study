@@ -1,4 +1,4 @@
-learn go
+Go Study
 ===
 
 Learn Material

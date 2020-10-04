@@ -21,6 +21,7 @@ func newDeck() deck {
 }
 
 // receiver function
+// receiver is like Java this, every variable of type 'deck' can call this function on itself
 func (d deck) printCards() {
 	for i, card := range d {
 		fmt.Println(i, card)

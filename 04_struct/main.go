@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// structure is like Python dictionary
+
 // define struct
 type person struct {
 	firstName string

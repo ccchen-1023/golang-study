@@ -7,9 +7,9 @@ import (
 
 type employee struct {
 	// filed name must start with a capital letter
-	Name     string `json:"name" binding:"required,min=2,max=20"`
-	EmpNo    int    `json:"emp_no" binding:"required,min=5,max=5"`
-	Birthday int64  `json:"birthday"  binding:"required"`
+	Name     string `json:"name"`
+	EmpNo    int    `json:"emp_no"`
+	Birthday int64  `json:"birthday"`
 }
 
 func main() {
@@ -38,5 +38,10 @@ func handleRequest(ctx *gin.Context) {
 	if ctx.ShouldBind(&emp) == nil {
 		log.Println(emp)
 	}
+	save(emp)
 	ctx.JSON(200, emp)
+}
+
+func save(emp employee) {
+	// save to ddb
 }

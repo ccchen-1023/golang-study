@@ -87,6 +87,7 @@ func createShortUrl(shortUrl ShortUrl) (ShortUrl, *ApiError) {
 		}
 	}
 	// put item
+	// TODO: ConditionCheck to handle race condition: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html
 	err = table.Put(shortUrl).Run()
 	if err != nil {
 		log.Println("Fail to put item to DynamoDB table", err)

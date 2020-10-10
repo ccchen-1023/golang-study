@@ -1,6 +1,10 @@
 package main
 
+// AWS SDK for Go: https://docs.aws.amazon.com/sdk-for-go/
+// AWS SDK for Go (DynamoDB): https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/using-dynamodb-with-go-sdk.html
+// dynamo is an expressive DynamoDB client for Go, https://github.com/guregu/dynamo
 // go get -u github.com/guregu/dynamo
+
 import (
 	"errors"
 	"fmt"

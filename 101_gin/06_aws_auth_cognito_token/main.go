@@ -1,7 +1,12 @@
 package main
 
-// Go implementation of JSON Web Tokens: https://github.com/dgrijalva/jwt-go
-// JWT debugger: https://jwt.io/
+// AWS article How can I decode and verify the signature of an Amazon Cognito JSON Web Token? - https://aws.amazon.com/tw/premiumsupport/knowledge-center/decode-verify-cognito-json-token/
+// Library to fetch public keys - https://github.com/lestrrat-go/jwx
+// Library to parse token - https://github.com/dgrijalva/jwt-go
+// Very helpful stackoverflow advice from eugenioy https://stackoverflow.com/questions/56905995/how-to-verify-a-jwt-token-from-aws-cognito-in-go
+// JWT token endocing and decoding - https://jwt.io/
+// AWS Cognito token validation with Go - https://www.nexmo.com/blog/2020/03/13/using-jwt-for-authentication-in-a-golang-application-dr
+// Using JWT for Authentication in a Golang Application - https://tomaschudjak.com/all-posts/gists/aws-cognito-token-validation-with-go/
 
 import (
 	"errors"
@@ -89,7 +94,7 @@ func auth(req *http.Request) (*jwt.Token, error) {
 
 	// AWS Cognito public keys are available at address:
 	// https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json
-	publicKeysURL := "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_FzFbL2FDR/.well-known/jwks.json"
+	publicKeysURL := "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_xxx/.well-known/jwks.json"
 
 	// Start with downloading public keys information
 	// The .Fetch method is used from https://github.com/lestrrat-go/jwx package
@@ -98,6 +103,7 @@ func auth(req *http.Request) (*jwt.Token, error) {
 		log.Printf("failed to parse key: %s", err)
 	}
 
+	// Use .Parse or .ParseWithClaims methods from https://github.com/dgrijalva/jwt-go
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if token.Method.Alg() != jwt.SigningMethodRS256.Name {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
